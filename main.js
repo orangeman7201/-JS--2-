@@ -1,13 +1,20 @@
 'use strict';
 
-let todo = new Array('==========','タスク一覧','==========','買い物','洗濯');
-console.log (todo.join('\n'));
+const todos = ['買い物','洗濯'];
 
-function Addtodo () {
-let word = prompt ('タスクを入力してください!');
-alert ('新しいタスクを追加しました');
-todo.push(word);
-console.log (todo.join('\n'));
+function addTodo () {
+  const task = prompt ('タスクを入力してください!');
+  alert ('新しいタスクを追加しました');
+  todos.push(task);
 }
 
-Addtodo ();
+function showTodo () {
+  console.log('==========\nタスク一覧\n==========')
+  todos.forEach((todo, index) => {
+    console.log(`${index}:${todo}`);
+  });
+}
+
+showTodo ();
+addTodo ();
+showTodo ();
