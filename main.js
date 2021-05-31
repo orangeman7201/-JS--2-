@@ -1,9 +1,9 @@
 'use strict';
 
 function addList (sum) {
-    const li = document.createElement('li')
-    li.textContent = sum;
-    document.querySelector('ul').appendChild(li);
+  const li = document.createElement('li')
+  li.textContent = sum;
+  document.querySelector('ul').appendChild(li);
 };
 
 function multipleCalculator (a, b) {
@@ -26,10 +26,10 @@ function multipleCalculator (a, b) {
 
 document.querySelector('button').addEventListener('click', () => {
 
-    let ul = document.querySelector('ul');
-    while(ul.firstChild) {
-      ul.removeChild(ul.firstChild);
-    };
+  let ul = document.querySelector('ul');
+  while(ul.firstChild) {
+    ul.removeChild(ul.firstChild);
+  };
 
   let x = parseInt(document.querySelectorAll('input')[0].value);
   let y = parseInt(document.querySelectorAll('input')[1].value);
