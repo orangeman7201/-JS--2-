@@ -25,7 +25,7 @@ function multipleCalculator(a, b) {
 }
 
 function isNumber(number) {
-   let regex = new RegExp(/^[0-9]+(\.[0-9]+)?$/);
+   const regex = /^([1-9]\d*|0)$/;
   return regex.test(number);
 };
 
@@ -35,13 +35,13 @@ document.querySelector('button').addEventListener('click', () => {
   while (ul.firstChild) {
     ul.removeChild(ul.firstChild);
   };
-
-  const fizzInputNumber = parseFloat(document.getElementById('fizzInputField').value);
-  const buzzInputNumber = parseFloat(document.getElementById('buzzInputField').value);
-
-  // console.log(isNumber(fizzInputNumber));
   
-  if (Number.isInteger(fizzInputNumber) && Number.isInteger(buzzInputNumber) && fizzInputNumber !== '' && buzzInputNumber !== '') {
+  let fizzNum = document.getElementById('fizzInputField').value;
+  let buzzNum = document.getElementById('buzzInputField').value;
+  const fizzInputNumber = parseFloat(fizzNum);
+  const buzzInputNumber = parseFloat(buzzNum);
+  
+  if ( fizzInputNumber !== '' && buzzInputNumber !== '' && isNumber(fizzNum) && isNumber(buzzNum)) {
     multipleCalculator(fizzInputNumber, buzzInputNumber);
   } else {
     addList('整数を入力してください');
