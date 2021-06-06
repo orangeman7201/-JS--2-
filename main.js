@@ -1,33 +1,35 @@
 'use strict';
 
-function addList(sum) {
-  const li = document.createElement('li')
-  li.textContent = sum;
-  document.querySelector('ul').appendChild(li);
-};
+const todos = [];
 
-function multipleCalculator(a, b) {
-  let aSum = a;
-  let bSum = b;   
-  while (aSum < 100) {
-    if (aSum < bSum) {
-      addList(`Fizz${aSum}`);
-      aSum += a;
-    } else if (aSum > bSum) {
-      addList(`Buzz${bSum}`);
-      bSum += b;
-    } else {
-      addList(`FizzBuzz${aSum}`);
-      aSum += a;
-      bSum += b;
-    }
-  }; 
+function updateTodos (word) {
+  todos.push(word);
 }
 
-function isNumber(number) {
-   const regex = /^([1-9]\d*|0)$/;
-  return regex.test(number);
+function showTodos () {
+  todos.forEach((todo, index) => {
+    const li = document.createElement('li')
+    li.innerHTML = index;
+
+    const span = document.createElement('span')
+    span.innerHTML = todo;
+    span.className = 'spanClassName';
+
+    const statusButton = document.createElement('button')
+    statusButton.textContent = '作業中';
+    statusButton.className = 'statusClassName';
+    
+    const deleteButton = document.createElement('button')
+    deleteButton.textContent = '削除';
+    deleteButton.className = 'deleteClassName';
+
+    li.append(span);
+    li.append(deleteButton);
+    li.append(statusButton);
+    document.querySelector('ul').appendChild(li);
+  });
 };
+
 
 document.querySelector('button').addEventListener('click', () => {
 
@@ -35,16 +37,11 @@ document.querySelector('button').addEventListener('click', () => {
   while (ul.firstChild) {
     ul.removeChild(ul.firstChild);
   };
-  
-  let fizzNum = document.getElementById('fizzInputField').value;
-  let buzzNum = document.getElementById('buzzInputField').value;
-  const fizzInputNumber = parseFloat(fizzNum);
-  const buzzInputNumber = parseFloat(buzzNum);
-  
-  if ( fizzInputNumber !== '' && buzzInputNumber !== '' && isNumber(fizzNum) && isNumber(buzzNum)) {
-    multipleCalculator(fizzInputNumber, buzzInputNumber);
-  } else {
-    addList('整数を入力してください');
-  }
-  
+
+  const inputJS = document.getElementById('inputHTML');
+  let todoItem = inputJS.value;
+  updateTodos (todoItem);
+  showTodos();
+  inputJS.value = '';
+  inputJS.focus();
 });
