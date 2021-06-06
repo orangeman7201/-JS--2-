@@ -1,26 +1,50 @@
 'use strict';
 
-const todos = {
-  掃除:'家事',
-  洗濯:'家事'
+function addList(sum) {
+  const li = document.createElement('li')
+  li.textContent = sum;
+  document.querySelector('ul').appendChild(li);
 };
 
-function addTodo () {
-  let task = prompt ('タスクを入力してください!');
-  let genre = prompt ('ジャンルを入力してください!');
-  alert ('タスクを追加しました');
-  todos[task] = genre;
-};
-
-function showTodo () {
-  console.log ('==========\nタスク一覧\n==========');
-  const keys = Object.keys(todos);
-  keys.forEach((key, index) => {
-    console.log(`${index}: [内容]: ${key} [ジャンル]: ${todos[key]}`)
-  });
+function multipleCalculator(a, b) {
+  let aSum = a;
+  let bSum = b;   
+  while (aSum < 100) {
+    if (aSum < bSum) {
+      addList(`Fizz${aSum}`);
+      aSum += a;
+    } else if (aSum > bSum) {
+      addList(`Buzz${bSum}`);
+      bSum += b;
+    } else {
+      addList(`FizzBuzz${aSum}`);
+      aSum += a;
+      bSum += b;
+    }
+  }; 
 }
 
+function isNumber(number) {
+   const regex = /^([1-9]\d*|0)$/;
+  return regex.test(number);
+};
 
-showTodo ();
-addTodo ();
-showTodo ();
+document.querySelector('button').addEventListener('click', () => {
+
+  const ul = document.querySelector('ul');
+  while (ul.firstChild) {
+    ul.removeChild(ul.firstChild);
+  };
+  
+  let fizzNum = document.getElementById('fizzInputField').value;
+  let buzzNum = document.getElementById('buzzInputField').value;
+  const fizzInputNumber = parseFloat(fizzNum);
+  const buzzInputNumber = parseFloat(buzzNum);
+  
+  if ( fizzInputNumber !== '' && buzzInputNumber !== '' && isNumber(fizzNum) && isNumber(buzzNum)) {
+    multipleCalculator(fizzInputNumber, buzzInputNumber);
+  } else {
+    addList('整数を入力してください');
+  }
+  
+});
