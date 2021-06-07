@@ -22,6 +22,17 @@ function showTodos () {
     const deleteButton = document.createElement('button')
     deleteButton.textContent = '削除';
     deleteButton.className = 'deleteClassName';
+    deleteButton.addEventListener('click', () => {
+      todos.splice(index, 1);
+
+      const ul = document.querySelector('ul');
+      while (ul.firstChild) {
+        ul.removeChild(ul.firstChild);
+      };
+      
+      showTodos();
+    });
+    
 
     li.append(span);
     li.append(deleteButton);
@@ -31,14 +42,14 @@ function showTodos () {
 };
 
 
-document.querySelector('button').addEventListener('click', () => {
-
+document.getElementById('submitButton').addEventListener('click', () => {
+  
   const ul = document.querySelector('ul');
   while (ul.firstChild) {
     ul.removeChild(ul.firstChild);
   };
-
-  const inputJS = document.getElementById('inputHTML');
+  
+  const inputJS = document.getElementById('input-html');
   let todoItem = inputJS.value;
   updateTodos (todoItem);
   showTodos();
