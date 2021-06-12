@@ -2,8 +2,6 @@
 
 const todos = [];
 const ul = document.querySelector('ul');
-const deleteButton = document.createElement('button')
-const statusButton = document.createElement('button')
 
 function addTodo (word) {
   todos.push(word);
@@ -18,18 +16,20 @@ function showTodos () {
     span.innerHTML = todo;
     span.className = 'spanClassName';
     
-    const deleteButton = document.createElement('button')
-    deleteButton.textContent = '削除';
-    deleteButton.className = 'deleteClassName';
-    deleteButton.addEventListener('click', () => {
-      deleteTodo (index);
-      updateStatus ();
-      showTodos ();
-    });
+    // const deleteButton = document.createElement('button')
+    // deleteButton.textContent = '削除';
+    // deleteButton.className = 'deleteClassName';
+    // deleteButton.addEventListener('click', () => {
+    //   deleteTodo (index);
+    //   updateStatus ();
+    //   showTodos ();
+    // });
 
-    const statusButton = document.createElement('button')
-    statusButton.textContent = '作業中';
-    statusButton.className = 'statusClassName';
+    // const statusButton = document.createElement('button')
+    // statusButton.textContent = '作業中';
+    // statusButton.className = 'statusClassName';
+    createStatusButton ();
+    createDeleteButton (todos.length - 1);
 
     li.append(span);
     li.append(deleteButton);
@@ -38,23 +38,23 @@ function showTodos () {
   });
 };
 
-// function createStatusButton () {
-//   const statusButton = document.createElement('button')
-//   statusButton.textContent = '作業中';
-//   statusButton.className = 'statusClassName';
-// }
+function createStatusButton () {
+  const statusButton = document.createElement('button')
+  statusButton.textContent = '作業中';
+  statusButton.className = 'statusClassName';
+}
 
-// function createDeleteButton (number) {
-  // const deleteButton = document.createElement('button')
-  // deleteButton.textContent = '削除';
-  // deleteButton.className = 'deleteClassName';
+function createDeleteButton (number) {
+  const deleteButton = document.createElement('button')
+  deleteButton.textContent = '削除';
+  deleteButton.className = 'deleteClassName';
 
-  // deleteButton.addEventListener('click', () => {
-  //   deleteTodo (number);
-  //   updateStatus ();
-  //   showTodos ();
-  //   });
-  //  }
+  deleteButton.addEventListener('click', () => {
+    deleteTodo (number);
+    updateStatus ();
+    showTodos ();
+    });
+   }
 
 
 function deleteTodo (number) {
