@@ -1,8 +1,11 @@
 'use strict';
 
 const todos = [];
+const ul = document.querySelector('ul');
+const deleteButton = document.createElement('button')
+const statusButton = document.createElement('button')
 
-function updateTodos (word) {
+function addTodo (word) {
   todos.push(word);
 }
 
@@ -10,48 +13,66 @@ function showTodos () {
   todos.forEach((todo, index) => {
     const li = document.createElement('li')
     li.innerHTML = index;
-
+    
     const span = document.createElement('span')
     span.innerHTML = todo;
     span.className = 'spanClassName';
-
-    const statusButton = document.createElement('button')
-    statusButton.textContent = '作業中';
-    statusButton.className = 'statusClassName';
     
     const deleteButton = document.createElement('button')
     deleteButton.textContent = '削除';
     deleteButton.className = 'deleteClassName';
     deleteButton.addEventListener('click', () => {
-      todos.splice(index, 1);
-
-      const ul = document.querySelector('ul');
-      while (ul.firstChild) {
-        ul.removeChild(ul.firstChild);
-      };
-      
-      showTodos();
+      deleteTodo (index);
+      updateStatus ();
+      showTodos ();
     });
-    
+
+    const statusButton = document.createElement('button')
+    statusButton.textContent = '作業中';
+    statusButton.className = 'statusClassName';
 
     li.append(span);
     li.append(deleteButton);
     li.append(statusButton);
-    document.querySelector('ul').appendChild(li);
+    ul.appendChild(li);
   });
 };
 
+// function createStatusButton () {
+//   const statusButton = document.createElement('button')
+//   statusButton.textContent = '作業中';
+//   statusButton.className = 'statusClassName';
+// }
 
-document.getElementById('submitButton').addEventListener('click', () => {
-  
-  const ul = document.querySelector('ul');
+// function createDeleteButton (number) {
+  // const deleteButton = document.createElement('button')
+  // deleteButton.textContent = '削除';
+  // deleteButton.className = 'deleteClassName';
+
+  // deleteButton.addEventListener('click', () => {
+  //   deleteTodo (number);
+  //   updateStatus ();
+  //   showTodos ();
+  //   });
+  //  }
+
+
+function deleteTodo (number) {
+  todos.splice(number, 1);
+}
+
+function updateStatus () {
   while (ul.firstChild) {
     ul.removeChild(ul.firstChild);
   };
-  
+}
+
+document.getElementById('submit-button').addEventListener('click', () => {
+  updateStatus ();
+    
   const inputJS = document.getElementById('input-html');
   let todoItem = inputJS.value;
-  updateTodos (todoItem);
+  addTodo(todoItem);
   showTodos();
   inputJS.value = '';
   inputJS.focus();
