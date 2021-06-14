@@ -2,6 +2,7 @@
 
 const todos = [];
 const ul = document.querySelector('ul');
+let statusButton,deleteButton;
 
 function addTodo (word) {
   todos.push(word);
@@ -9,56 +10,44 @@ function addTodo (word) {
 
 function showTodos () {
   todos.forEach((todo, index) => {
-    const li = document.createElement('li')
+    const li = document.createElement('li');
     li.innerHTML = index;
     
-    const span = document.createElement('span')
+    const span = document.createElement('span');
     span.innerHTML = todo;
-    span.className = 'spanClassName';
-    
-    // const deleteButton = document.createElement('button')
-    // deleteButton.textContent = '削除';
-    // deleteButton.className = 'deleteClassName';
-    // deleteButton.addEventListener('click', () => {
-    //   deleteTodo (index);
-    //   updateStatus ();
-    //   showTodos ();
-    // });
+    li.appendChild(span);
+  
+    createDeleteButton ();
+    addDeleteFeature (index);
+    li.appendChild(deleteButton);
 
-    // const statusButton = document.createElement('button')
-    // statusButton.textContent = '作業中';
-    // statusButton.className = 'statusClassName';
     createStatusButton ();
-    createDeleteButton (todos.length - 1);
-
-    li.append(span);
-    li.append(deleteButton);
-    li.append(statusButton);
-    ul.appendChild(li);
+    li.appendChild(statusButton);
+    
+    ul.appendChild(li);    
   });
 };
 
 function createStatusButton () {
-  const statusButton = document.createElement('button')
-  statusButton.textContent = '作業中';
-  statusButton.className = 'statusClassName';
+	statusButton = document.createElement('button');
+	statusButton.textContent = '作業中';
+	statusButton.className = 'statusClassName';
 }
 
-function createDeleteButton (number) {
-  const deleteButton = document.createElement('button')
-  deleteButton.textContent = '削除';
-  deleteButton.className = 'deleteClassName';
 
+function createDeleteButton () {
+	deleteButton = document.createElement('button');
+	deleteButton.textContent = '削除';
+	deleteButton.className = 'deleteClassName';
+}
+
+function addDeleteFeature (number) {
   deleteButton.addEventListener('click', () => {
-    deleteTodo (number);
+    todos.splice(number, 1);
     updateStatus ();
     showTodos ();
-    });
-   }
+  });
 
-
-function deleteTodo (number) {
-  todos.splice(number, 1);
 }
 
 function updateStatus () {
