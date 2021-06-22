@@ -4,9 +4,13 @@ const todos = [];
 const ul = document.querySelector('ul');
 let statusButton,deleteButton;
 
+
 function addTodo (word) {
-  todos.push(word);
+  const addItem = {};
+  addItem[word] = 'working';
+  todos.push(addItem) ;
 }
+
 
 function showTodos () {
   todos.forEach((todo, index) => {
@@ -14,32 +18,55 @@ function showTodos () {
     li.innerHTML = index;
     
     const span = document.createElement('span');
-    span.innerHTML = todo;
+    span.innerHTML = Object.keys(todo);
     li.appendChild(span);
-  
+    
     createDeleteButton ();
     addDeleteFeature (index);
     li.appendChild(deleteButton);
-
-    createStatusButton ();
+    
+    createStatusButton (Object.values(todo));
+    addStatusFeature (Object.keys(todo), index);
     li.appendChild(statusButton);
     
-    ul.appendChild(li);    
-  });
-};
+    ul.appendChild(li);
+   });
+}
 
-function createStatusButton () {
-	statusButton = document.createElement('button');
-	statusButton.textContent = '作業中';
-	statusButton.className = 'statusClassName';
+
+function createStatusButton (status) {
+  statusButton = document.createElement('button');
+  if (status == 'working finish') {
+    statusButton.className = 'working finish';
+    statusButton.textContent = '完了';
+  } else {
+    statusButton.className = 'working';
+    statusButton.textContent = '作業中';
+  }
+}
+
+
+function addStatusFeature (todo, index) {
+  statusButton.addEventListener('click', () => {
+    const working = document.getElementsByClassName('working')[index];
+    working.classList.toggle('finish');
+    if (working.classList.contains('finish')) {
+      working.innerHTML = '完了';
+      todos[index][todo] = 'working finish';
+    } else {
+      working.innerHTML = `作業中`;
+      todos[index][todo] = 'working';
+    }
+  });
 }
 
 
 function createDeleteButton () {
-	deleteButton = document.createElement('button');
+  deleteButton = document.createElement('button');
 	deleteButton.textContent = '削除';
 	deleteButton.className = 'deleteClassName';
 }
+
 
 function addDeleteFeature (number) {
   deleteButton.addEventListener('click', () => {
@@ -47,14 +74,15 @@ function addDeleteFeature (number) {
     updateStatus ();
     showTodos ();
   });
-
 }
+
 
 function updateStatus () {
   while (ul.firstChild) {
     ul.removeChild(ul.firstChild);
   };
 }
+
 
 document.getElementById('submit-button').addEventListener('click', () => {
   updateStatus ();
