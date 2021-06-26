@@ -1,7 +1,6 @@
 'use strict';
 
 const todos = [];
-const ul = document.querySelector('ul');
 const table = document.querySelector('table');
 let statusButton,deleteButton;
 
@@ -60,7 +59,7 @@ function showTodos() {
 
 function createStatusButton(status) {
   statusButton = document.createElement('button');
-  if(status == 'working finish') {
+  if(status[0] === 'working finish') {
     statusButton.textContent = '完了';
   } else {
     statusButton.textContent = '作業中';
