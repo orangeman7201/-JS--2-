@@ -7,11 +7,19 @@
 </head>
 <body>
 
-  <h1>
-    <p id="id">ID</p>
-    <p id="coment">コメント</p>
-    <p id="status">状態</p>
-  </h1>
+  <form id="form">
+    <label><input type="radio" name="status" value="all" onchange="showTodos()" checked>すべて</label>
+    <label><input type="radio" name="status" value="working" onchange="showWorking()">作業中</label>
+    <label><input type="radio" name="status" value="working finish" onchange="showFinish()">完了</label>
+  </form>
+
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>コメント</th>
+      <th align="left">状態</th>
+    </tr>
+  </table>
 
   <ul>
   </ul>
