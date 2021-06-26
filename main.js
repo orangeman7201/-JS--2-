@@ -93,7 +93,7 @@ function addDeleteFeature(number) {
 }
 
 function updateStatus() {
-  while (table.firstChild) {
+  while(table.firstChild) {
     table.removeChild(table.firstChild);
   };
   const tr = document.createElement('tr');
@@ -114,17 +114,17 @@ function getRadioValue(){
 }
 
 function radioFunction() {
-  if (getRadioValue() === 'all') {
+  if(getRadioValue() === 'all') {
     showTodos();
-  } else if (getRadioValue() === 'working'){
+  } else if(getRadioValue() === 'working'){
     showWorking();
-  } else if (getRadioValue() === 'working finish') {
+  } else if(getRadioValue() === 'working finish') {
     showFinish();
   }
 }
 
 document.getElementById('submit-button').addEventListener('click', () => {
-  updateStatus ();
+  updateStatus();
   const inputJS = document.getElementById('input-html');
   let todoItem = inputJS.value;
   addTodo(todoItem);
